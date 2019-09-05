@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    "outDir": "build/dist",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es5",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "incremental": true,
+    "tsBuildInfoFile": "build.info",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "baseUrl": "src",
+    "paths": {
+      "@components": [
+        "components"
+      ],
+      "@pages": [
+        "pages"
+      ],
+      "@services": [
+        "services"
+      ],
+      "@actions": [
+        "actions"
+      ],
+      "@model": [
+        "model"
+      ],
+      "@dtos": [
+        "dtos"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
+  ],
+  "types": [
+    "typePatches"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "react-ssr-demo",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
+    "@types/styled-components": "4.1.8",
+    "@types/react-redux": "7.1.2",
+    "@types/react-router": "5.0.3",
+    "@types/react-router-dom": "4.3.5",
+    "@types/express": "4.17.1",
+    "react-scripts-ts": "3.1.0",
+    "typescript": "3.5.3",
+    "ts-node": "7.0.1",
+    "nodemon": "1.19.1",
+    "cross-env": "5.2.0"
+  },
+  "dependencies": {
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "styled-components": "4.3.2",
+    "react-router": "5.0.1",
+    "react-router-dom": "5.0.1",
+    "redux": "4.0.4",
+    "redux-thunk": "2.3.0",
+    "react-redux": "7.1.0",
+    "connected-react-router": "6.5.2",
+    "express": "4.17.1",
+    "node-fetch": "2.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "serve": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/server.tsx",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom"
+  }
+}

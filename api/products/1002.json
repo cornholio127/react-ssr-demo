@@ -1,0 +1,10 @@
+{
+  "productDetails": {
+    "id": 1002,
+    "name": "Product 1002",
+    "price": "1259.00",
+    "description": "This is product 1002.",
+    "stock": 33,
+    "color": "red"
+  }
+}
