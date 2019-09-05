@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 
@@ -37,6 +37,8 @@ export const useDispatchSsr: () => Dispatch = () => {
   return dispatch;
 };
 
+const preloadedComponentState = () => (window as any).__PRELOADED_COMPONENT_STATE__ as any[];
+
 export const useFetchedStateSsr: <T> (initialState: T, asyncFetch: (params: any) => Promise<T>, params: any[]) => [T, (newState: T) => void] = (initialState, asyncFetch, params) => {
   const [state, setState] = useState(initialState);
   if (isSsr()) {
@@ -55,22 +57,24 @@ export const useFetchedStateSsr: <T> (initialState: T, asyncFetch: (params: any)
       return [s, setState];
     }
   } else {
-    const preloadedComponentState = (window as any).__PRELOADED_COMPONENT_STATE__ as any[];
-    if (preloadedComponentState && preloadedComponentState.length > 0) {
-      const s = preloadedComponentState[0];
-      if (preloadedComponentState.length > 1) {
-        (window as any).__PRELOADED_COMPONENT_STATE__ = preloadedComponentState.slice(1);
-      } else {
-        delete (window as any).__PRELOADED_COMPONENT_STATE__;
-      }
+    const didMountRef = useRef(false);
+    const didHavePreloadedState = useRef(false);
+    useEffect(
+      () => {
+        if (!didHavePreloadedState.current || didMountRef.current) {
+          (asyncFetch.apply(undefined, params) as Promise<any>).then(setState);
+        } else {
+          didMountRef.current = true;
+        }
+      }, 
+      params,
+    );
+    if (preloadedComponentState().length > 0) {
+      didHavePreloadedState.current = true;
+      const s = preloadedComponentState()[0];
+      (window as any).__PRELOADED_COMPONENT_STATE__ = preloadedComponentState().slice(1);
       return [s, setState];
     } else {
-      useEffect(
-        () => {
-          (asyncFetch.apply(undefined, params) as Promise<any>).then(setState);
-        }, 
-        params,
-      );
       return [state, setState];
     }
   }

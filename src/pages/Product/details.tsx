@@ -55,6 +55,10 @@ const ProductDetails: React.FunctionComponent<Props> = props => {
       {echoBefore && echoBefore.data} / {echoAfter && echoAfter.data}
       <hr />
       <NavLink to="/products">Products</NavLink>
+      <hr />
+      <NavLink to="/products/1001">1001</NavLink><br />
+      <NavLink to="/products/1002">1002</NavLink><br />
+      <NavLink to="/products/1003">1003</NavLink><br />
     </React.Fragment>
   );
 };
